@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NG导航 · 温和可靠的信息索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f5f7fc;
+            color: #1e1f23;
+            line-height: 1.65;
+        }
+
+        /* 深色头图 — 产品说明式 */
+        .hero {
+            background: linear-gradient(145deg, #0c111a 0%, #1b2538 100%);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            color: #e4e8f0;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 450;
+            letter-spacing: 1px;
+            margin-bottom: 0.75rem;
+            color: #f0f4ff;
+        }
+
+        .hero .tagline {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 680px;
+            margin: 0 auto 1.2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding-bottom: 1rem;
+        }
+
+        .hero .sub {
+            font-size: 0.95rem;
+            opacity: 0.55;
+            margin-top: 0.2rem;
+        }
+
+        /* 主体浅色区域 */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2.5rem 1.8rem 4rem;
+        }
+
+        /* 卡片模块 — 差异化圆角与阴影 */
+        .section-card {
+            background: #ffffff;
+            border-radius: 32px 12px 32px 12px;
+            padding: 2.2rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: box-shadow 0.2s;
+        }
+
+        .section-card:hover {
+            box-shadow: 0 10px 30px rgba(18, 52, 106, 0.04);
+        }
+
+        .section-card h2 {
+            font-size: 1.6rem;
+            font-weight: 480;
+            margin-bottom: 1.5rem;
+            color: #121826;
+            padding-left: 0.3rem;
+            border-left: 6px solid #386bc0;
+            padding-left: 1rem;
+        }
+
+        .section-card h3 {
+            font-size: 1.2rem;
+            font-weight: 480;
+            margin: 1.5rem 0 0.8rem;
+            color: #1f2937;
+        }
+
+        .section-card p {
+            margin-bottom: 1rem;
+            color: #2d3342;
+        }
+
+        .section-card ul {
+            list-style: none;
+            padding-left: 0.5rem;
+        }
+
+        .section-card li {
+            margin-bottom: 0.65rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .section-card li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #386bc0;
+            font-size: 1.2rem;
+        }
+
+        /* 链接强调色 */
+        a {
+            color: #1d5bbf;
+            text-decoration: none;
+            border-bottom: 1px dotted #b7c9e8;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        a:hover {
+            color: #0a3980;
+            border-bottom: 1px solid #1d5bbf;
+        }
+
+        /* 引用与小提示区块 */
+        .note-box {
+            background: #edf2fa;
+            border-radius: 20px 8px 20px 8px;
+            padding: 1.2rem 1.6rem;
+            margin: 1.8rem 0 0.8rem;
+            border-left: 4px solid #386bc0;
+            font-size: 0.95rem;
+        }
+
+        .note-box strong {
+            color: #172554;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.6rem;
+            margin-top: 1.5rem;
+        }
+
+        .faq-item {
+            background: #f9faff;
+            padding: 1.2rem 1.4rem;
+            border-radius: 18px 6px 18px 6px;
+            border: 1px solid #e2e9f6;
+        }
+
+        .faq-item .q {
+            font-weight: 550;
+            color: #0e1c3a;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .faq-item .a {
+            font-size: 0.92rem;
+            color: #3b4357;
+        }
+
+        .scene-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin: 0.5rem 0 0.2rem;
+        }
+
+        .scene-tag {
+            background: #eef3fd;
+            border-radius: 32px;
+            padding: 0.3rem 1rem;
+            font-size: 0.9rem;
+            color: #1f3a6b;
+            border: 1px solid #d6e1f5;
+        }
+
+        .access-hint {
+            margin-top: 2rem;
+            text-align: center;
+            font-size: 0.95rem;
+            background: #ffffffd0;
+            backdrop-filter: blur(2px);
+            padding: 1rem 2rem;
+            border-radius: 80px;
+            border: 1px solid #e2eaf8;
+            color: #25344f;
+        }
+
+        .access-hint a {
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+
+        .access-hint a:hover {
+            border-bottom: 2px solid #1d5bbf;
+        }
+
+        /* 响应式 */
+        @media (max-width: 650px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero { padding: 3.5rem 1.2rem 2.8rem; }
+            .container { padding: 1.8rem 1rem; }
+            .section-card { padding: 1.5rem 1.2rem; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .access-hint { border-radius: 30px; padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 深色头图：产品气质 -->
+    <header class="hero">
+        <h1>NG导航 · 索引之上</h1>
+        <p class="tagline">从信息节点到探索起点，保持克制的导航工具</p>
+        <div class="sub">不追踪 · 不夸大 · 只做真实的连接</div>
+    </header>
+
+    <main class="container">
+        <!-- 摘要卡片 -->
+        <section class="section-card">
+            <h2>产品摘要</h2>
+            <p><strong>NG导航</strong> 并不试图成为万物的入口，而是提供一套经过筛选的主题索引。它围绕不同领域的关键内容展开，帮助你在庞杂的网络中更快找到值得停留的章节。每个推荐都带着审慎——只收录对一类人有真实价值的资源，而非无差别堆砌。</p>
+            <p>从通用索引到垂直主题，<a href="https://hub-ng.com">NG导航</a> 的目录结构始终以用户的使用场景为锚点。你在这里看到的每一个链接背后，都经过至少一次人工判断。信息过载的时代，少而可信的指向，往往比繁多的列表更有力量。</p>
+        </section>
+
+        <!-- 亮点与特点 -->
+        <section class="section-card">
+            <h2>几个值得留意的特点</h2>
+            <ul>
+                <li><strong>分类清晰而克制</strong> — 不盲目追求大而全，每个类目只保留真正有持续维护价值的站点或工具。</li>
+                <li><strong>强调可读性与节奏</strong> — 每个条目带有简短的功能解释，而非一串冰冷链接。你可以在翻阅时自然理解它的用途。</li>
+                <li><strong>面向真实需求</strong> — 导航的设计围绕「寻找-发现-使用」展开，而非营销或流量分发。没有弹窗，没有诱导。</li>
+                <li><strong>长期维护的承诺</strong> — 项目不会一次性堆积上千链接后弃之不顾，而是随着资源变化逐步更新。</li>
+            </ul>
+            <div class="note-box">
+                <strong>💡 一点使用建议：</strong> 不必把 <a href="https://hub-ng.com">NG导航</a> 当作搜索引擎的替代品，它更适合作为你开启某类探索时的第一站。比如当你需要寻找某个领域的入门读物、实用工具或社区时，从这里开始往往更直接。
+            </div>
+        </section>
+
+        <!-- 适用场景 + 可信说明 -->
+        <section class="section-card">
+            <h2>适合哪些场景？</h2>
+            <p>无论是自学一项新技能、寻找某个开源项目的替代品，还是想了解某个话题下的优质内容源，<a href="https://hub-ng.com">NG导航</a> 都能提供一个安静的起点。我们建议你在以下时刻想起它：</p>
+            <div class="scene-list">
+                <span class="scene-tag">📚 学习资源筛选</span>
+                <span class="scene-tag">🛠️ 工具发现</span>
+                <span class="scene-tag">🧩 兴趣索引</span>
+                <span class="scene-tag">📂 知识管理</span>
+                <span class="scene-tag">🌐 跨领域浏览</span>
+            </div>
+
+            <h3 style="margin-top:2rem;">关于可信与克制</h3>
+            <p>NG导航 不参与任何形式的流量置换或付费排名。索引中的每个推荐都基于编辑团队（或贡献者）的实际体验与公开信息整理。我们无意成为权威，也不承诺永不失效——网络资源本身就有生命周期。但我们会尽量在发现链接失效时做出标注或替换，保持索引的基本可信度。</p>
+        </section>
+
+        <!-- FAQ 摘要 -->
+        <section class="section-card">
+            <h2>常见想法 · 简短回答</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <span class="q">收录标准是什么？</span>
+                    <span class="a">主要看内容质量、更新活跃度以及是否对特定人群有实际帮助。不收录明显低质或纯广告页面。</span>
+                </div>
+                <div class="faq-item">
+                    <span class="q">我能提交新站点吗？</span>
+                    <span class="a">目前通过项目页的反馈渠道可以提交建议，但收录与否由编辑团队评估，无法保证一定加入。</span>
+                </div>
+                <div class="faq-item">
+                    <span class="q">会收费吗？</span>
+                    <span class="a">完全免费。导航本身不设置付费墙，也没有隐藏内容。未来也不打算改变这一点。</span>
+                </div>
+                <div class="faq-item">
+                    <span class="q">适合新手还是资深用户？</span>
+                    <span class="a">两者皆有。新手可以快速找到入门资源，资深用户则可能发现一些冷门但优质的工具或社区。</span>
+                </div>
+            </div>
+            <p style="margin-top:1.5rem; font-size:0.95rem;">更详细的说明可以前往 <a href="https://hub-ng.com">NG导航</a> 浏览，页面中对每个分类都有额外的注释。</p>
+        </section>
+
+        <!-- 克制的访问提示 -->
+        <div class="access-hint">
+            🌱 如果感兴趣，可以直接访问 <a href="https://hub-ng.com">NG导航</a> ，慢慢翻阅。不必一次看完，它更适合收藏起来，在需要时打开。
+        </div>
+
+        <!-- 极简脚注 -->
+        <div style="text-align: center; margin-top: 3rem; font-size: 0.8rem; color: #7d879c; border-top: 1px solid #e1e7f0; padding-top: 1.8rem;">
+            <span>NG导航 · 以温和的方式整理网络</span>
+        </div>
+    </main>
+</body>
+</html>
